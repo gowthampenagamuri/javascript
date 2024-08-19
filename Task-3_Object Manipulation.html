@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Object Manipulation</title>
+    <style>
+        body {
+            background: linear-gradient(black,red,white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            gap: 20px;
+            background-color: rgb(26, 25, 25);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            max-width: 360px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            background-color: white;
+            color: red;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: white;
+            color: red;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f1f1f1;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Person Object</h2>
+        <label>First Name: <input type="text" id="firstNameInput" value="Gowtham"></label>
+        <label>Last Name: <input type="text" id="lastNameInput" value="Penagamuri"></label>
+        <label>Age: <input type="number" id="ageInput" value="19"></label>
+        <button onclick="updatePerson()">Update Person</button>
+        
+        <h3>Person Info</h3>
+        <label>Full Name: <span id="fullName"></span></label>
+        <label>Age: <span id="age"></span></label>
+        <button onclick="incrementPersonAge()">Increase Age</button>
+    </div>
+
+    <script>
+
+        let Person = {
+            firstName: "",
+            lastName: "",
+            age: 0,
+
+            getFullName: function() {
+                return this.firstName + " " + this.lastName;
+            },
+
+            incrementAge: function() {
+                this.age += 1;
+            }
+        };
+
+        function updatePerson() {
+            const firstName = document.getElementById('firstNameInput').value;
+            const lastName = document.getElementById('lastNameInput').value;
+            const age = parseInt(document.getElementById('ageInput').value, 10);
+
+            Person.firstName = firstName;
+            Person.lastName = lastName;
+            Person.age = age;
+
+            updatePersonInfo();
+        }
+
+        function updatePersonInfo() {
+            document.getElementById('fullName').textContent = Person.getFullName();
+            document.getElementById('age').textContent = Person.age;
+        }
+
+        function incrementPersonAge() {
+            Person.incrementAge();
+            updatePersonInfo();
+        }
+
+        
+        updatePersonInfo();
+    </script>
+</body>
+</html>
